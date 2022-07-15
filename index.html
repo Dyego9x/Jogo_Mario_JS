@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="./css/style.css">        
+
+        <title>Mario Jumper</title>
+
+    </head>
+    <body>
+        <div class="game-board">
+            <img src="./images/mario.gif" class="mario">
+            <img src="./images/pipe.png" class="pipe">
+        </div>
+    </body>
+    <script>
+        const mario = document.querySelectorAll('.mario')[0];
+        const jump = () => {
+            mario.classList.add("jump");
+            setTimeout(()=>{
+                mario.classList.remove('jump');
+            },600);
+        }
+        document.addEventListener('keydown', jump);
+
+        const pipe = document.querySelector('.pipe');
+
+
+        const loop = setInterval(()=>{
+            const pipePosition = pipe.offsetLeft;
+            const marioPosition = +window.getComputedStyle(mario).bottom.replace('px','');
+
+            if (pipePosition <= 120 && pipePosition > 0 && marioPosition <= 80) {
+
+                pipe.style.animation = 'none';
+                pipe.style.left = '${pipePosition}px';
+
+                pipe.style.animation = 'none';
+                pipe.style.bottom = '${marioPosition}px';
+            }
+        }, 10);
+    </script>
+    <script src="./js/script.js"></script>
+</html>
